@@ -7,6 +7,11 @@
   animation: animate-in 1s ease-out forwards;
 }
 
+.post a {
+  text-decoration: none;
+  color: #593884;
+}
+
 .author {
   font-size: 0.8rem;
   font-weight: bold;
