@@ -32,12 +32,12 @@ export default function ImagePicker({ label, name }) {
     <div className={classes.picker}>
       <label htmlFor={name}>{label}</label>
       <div className={classes.controls}>
-        <dic className={classes.preview}>
+        <div className={classes.preview}>
           {!pickedImage && <p>No image provided yet</p>}
           {pickedImage && (
             <Image src={pickedImage} alt="The selected image" fill />
           )}
-        </dic>
+        </div>
         <input
           ref={imageInputRef}
           className={classes.input}
