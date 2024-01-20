@@ -2,6 +2,7 @@
 // It do not have to be action.js name for file
 import { redirect } from 'next/navigation';
 import { saveMeal } from './meals';
+import { revalidatePath } from 'next/cache';
 
 function isInvalidText(text) {
   return text.title && text.title.trim() === '';
@@ -34,5 +35,6 @@ export async function shareMeal(prevState, formData) {
     };
   }
   await saveMeal(meal);
+  revalidatePath('/meals'); //revalidate cache that belong to certain url path, 'path' - that one page, 'layout' - page and it's children pages
   redirect('/meals');
 }

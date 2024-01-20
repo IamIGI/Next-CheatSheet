@@ -3,6 +3,21 @@ import classes from './page.module.css';
 import { getMeal } from '@/lib/meals';
 import { notFound } from 'next/navigation';
 
+//for pages that are dynamic, we can't export const metaData, we have to use dedicated method
+// name - generateMetadata();
+export async function generateMetadata({ params }) {
+  const meal = getMeal(params.slug);
+
+  if (!meal) {
+    notFound();
+  }
+
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
+
 export default function MealsDetailsPage({ params }) {
   const meal = getMeal(params.slug);
 
