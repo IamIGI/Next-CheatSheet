@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import serverUtil from '../utils/server.util';
+import serverUtil from '../../utils/server.util';
 
 function ProductDetailPage(props) {
   const { loadedProduct } = props;
