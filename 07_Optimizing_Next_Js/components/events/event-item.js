@@ -3,6 +3,7 @@ import DateIcon from '../icons/date-icon';
 import AddressIcon from '../icons/address-icon';
 import ArrowRightIcon from '../icons/arrow-right-icon';
 import classes from './event-item.module.css';
+import Image from 'next/image';
 
 function EventItem(props) {
   const { title, image, date, location, id } = props;
@@ -17,7 +18,10 @@ function EventItem(props) {
 
   return (
     <li className={classes.item}>
-      <img src={'/' + image} alt={title} />
+      {/* Image is next component, that will create multiple version of our image, 
+       and use the best for given device (apple, android, ios, windows, depend on browser) */}
+      {/* You can see cached image on .next/cache/images folder in project structure */}
+      <Image src={'/' + image} alt={title} width={250} height={160} />
       <div className={classes.content}>
         <div className={classes.summary}>
           <h2>{title}</h2>
