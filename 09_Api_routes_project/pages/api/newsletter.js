@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import DBConnect from '../../helpers/DB-connect';
 
 async function handler(req, res) {
   if ((req.method = 'POST')) {
@@ -9,21 +9,23 @@ async function handler(req, res) {
       return;
     }
 
-    // Add to mongoDB you Ip address to whtie list (Network Access tab)
-    // when you deploy app, also remember to add server ip there
-    const mongoDbUser = {
-      userName: 'NextUser',
-      password: 'NextPassword',
-      collectionName: 'events',
-    };
+    let client;
+    try {
+      client = await DBConnect.connectDatabase();
+    } catch (error) {
+      res.status(500).json({ message: 'Connecting to the DB failed!' });
+      return;
+    }
 
-    const client = await MongoClient.connect(
-      `mongodb+srv://${mongoDbUser.userName}:${mongoDbUser.password}@cluster0.xgqtc.mongodb.net/${mongoDbUser.collectionName}?retryWrites=true&w=majority`
-    );
-
-    const db = client.db();
-    await db.collection('newsletter').insertOne({ email: userEmail });
-    client.close();
+    try {
+      await DBConnect.insertDocument(client, 'newsletter', {
+        email: userEmail,
+      });
+      client.close();
+    } catch (error) {
+      res.status(500).json({ message: 'Inserting data failed' });
+      return;
+    }
 
     res.status(201).json({ message: 'Signed up!' });
   }
