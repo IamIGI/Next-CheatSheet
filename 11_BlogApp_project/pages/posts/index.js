@@ -1,41 +1,19 @@
 import AllPosts from '../../components/posts/all-posts';
+import postsUtil from '../../lib/posts-util';
 
-const DUMMY_POSTS = [
-  {
-    slug: 'getting-started-with-nextJs',
-    title: 'Getting started with NextJs',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'getting-started-with-NextJs excerpt that is long and you should use loremIpsum',
-    date: '2023-02-10',
-  },
-  {
-    slug: 'getting-started-with-nextJs2',
-    title: 'Getting started with NextJs',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'getting-started-with-NextJs excerpt that is long and you should use loremIpsum',
-    date: '2023-02-10',
-  },
-  {
-    slug: 'getting-started-with-nextJs3',
-    title: 'Getting started with NextJs',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'getting-started-with-NextJs excerpt that is long and you should use loremIpsum',
-    date: '2023-02-10',
-  },
-  {
-    slug: 'getting-started-with-nextJs4',
-    title: 'Getting started with NextJs',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-      'getting-started-with-NextJs excerpt that is long and you should use loremIpsum',
-    date: '2023-02-10',
-  },
-];
-function AllPostsPage() {
-  return <AllPosts posts={DUMMY_POSTS} />;
+function AllPostsPage(props) {
+  return <AllPosts posts={props.posts} />;
+}
+
+export function getStaticProps() {
+  const allPosts = postsUtil.getAllPosts();
+
+  return {
+    props: {
+      posts: allPosts,
+    },
+    // revalidate: 60,
+  };
 }
 
 export default AllPostsPage;
