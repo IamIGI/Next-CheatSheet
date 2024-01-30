@@ -1,8 +1,20 @@
+import Head from 'next/head';
 import AllPosts from '../../components/posts/all-posts';
 import postsUtil from '../../lib/posts-util';
 
 function AllPostsPage(props) {
-  return <AllPosts posts={props.posts} />;
+  return (
+    <>
+      <Head>
+        <title>All Posts</title>
+        <meta
+          name="description"
+          content="List of all programming realted tutorials"
+        ></meta>
+      </Head>
+      <AllPosts posts={props.posts} />;
+    </>
+  );
 }
 
 export function getStaticProps() {
