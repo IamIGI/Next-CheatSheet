@@ -25,7 +25,7 @@ export const authOptions = {
           .db()
           .collection('users')
           .findOne({ email: credentials.email });
-        console.log(user);
+
         if (!user) throwError(client, 'No user found!');
 
         const isValid = await authUtil.verifyPassword(
